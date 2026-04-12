@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>上海五一行程表 v3</title>
+<style>
+  :root {
+    --bg: #f5f5f0;
+    --card: #ffffff;
+    --header: #2c3e50;
+    --accent: #e67e22;
+    --confirmed: #27ae60;
+    --warning: #e74c3c;
+    --pending: #f39c12;
+    --muted: #7f8c8d;
+    --text: #2c3e50;
+    --border: #e0e0e0;
+    --blue: #2980b9;
+    --light-blue: #eaf2f8;
+    --light-green: #eafaf1;
+    --light-yellow: #fef9e7;
+    --light-red: #fdedec;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding-bottom: 80px;
+  }
+
+  /* Header */
+  .hero {
+    background: linear-gradient(135deg, var(--header) 0%, #34495e 100%);
+    color: white;
+    padding: 24px 16px 20px;
+    text-align: center;
+  }
+  .hero h1 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+  .hero .subtitle { font-size: 14px; opacity: 0.85; }
+
+  /* Tab navigation */
+  .tabs {
+    display: flex;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex: 0 0 auto;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .tab.active {
+    color: var(--header);
+    border-bottom-color: var(--accent);
+  }
+
+  /* Day sections */
+  .day-section { display: none; padding: 12px; }
+  .day-section.active { display: block; }
+
+  .day-header {
+    background: linear-gradient(135deg, var(--header), #34495e);
+    color: white;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+  .day-header h2 { font-size: 18px; font-weight: 700; }
+  .day-header .day-subtitle { font-size: 13px; opacity: 0.8; margin-top: 2px; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 20px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .event {
+    position: relative;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--border);
+  }
+  .event::before {
+    content: '';
+    position: absolute;
+    left: -18px;
+    top: 18px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border);
+    border: 2px solid white;
+  }
+  .event.confirmed { border-left-color: var(--confirmed); }
+  .event.confirmed::before { background: var(--confirmed); }
+  .event.highlight { border-left-color: var(--accent); }
+  .event.highlight::before { background: var(--accent); }
+  .event.warning { border-left-color: var(--warning); }
+  .event.warning::before { background: var(--warning); }
+  .event.pending-item { border-left-color: var(--pending); }
+  .event.pending-item::before { background: var(--pending); }
+  .event.optional { border-left-color: var(--muted); opacity: 0.85; }
+  .event.optional::before { background: var(--muted); }
+
+  .event-time {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 2px;
+  }
+  .event-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .event-location {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .event-location a { color: var(--blue); text-decoration: none; }
+  .event-notes {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  /* Badges */
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-right: 4px;
+    margin-bottom: 2px;
+  }
+  .badge-green { background: var(--light-green); color: var(--confirmed); }
+  .badge-red { background: var(--light-red); color: var(--warning); }
+  .badge-yellow { background: var(--light-yellow); color: #d68910; }
+  .badge-blue { background: var(--light-blue); color: var(--blue); }
+
+  /* Route card */
+  .route-card {
+    background: var(--light-blue);
+    border-radius: 10px;
+    padding: 12px;
+    margin: 8px 0 12px;
+    font-size: 12px;
+    color: var(--blue);
+    line-height: 1.6;
+  }
+  .route-card strong { font-weight: 600; }
+
+  /* Bookings section */
+  .section-title {
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 16px 8px;
+    color: var(--header);
+  }
+
+  .booking-card {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin: 0 12px 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .booking-info { flex: 1; }
+  .booking-name { font-size: 14px; font-weight: 600; }
+  .booking-detail { font-size: 12px; color: var(--muted); }
+  .booking-platform { font-size: 11px; color: var(--blue); }
+  .booking-status {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+  }
+  .status-confirmed { background: var(--light-green); color: var(--confirmed); }
+  .status-pending { background: var(--light-yellow); color: #d68910; }
+
+  /* Todo list */
+  .todo-card {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin: 0 12px 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .todo-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .todo-text { flex: 1; }
+  .todo-title { font-size: 13px; font-weight: 600; }
+  .todo-desc { font-size: 12px; color: var(--muted); }
+  .todo-done .todo-title { text-decoration: line-through; color: var(--muted); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>上海五一行程表</h1>
+  <div class="subtitle">4/30 – 5/4, 2026 ｜ 爸媽來上海 ｜ v3</div>
+</div>
+
+<div class="tabs" id="tabs">
+  <div class="tab active" data-day="d1">D1 週四</div>
+  <div class="tab" data-day="d2">D2 週五</div>
+  <div class="tab" data-day="d3">D3 週六</div>
+  <div class="tab" data-day="d4">D4 週日</div>
+  <div class="tab" data-day="d5">D5 週一</div>
+  <div class="tab" data-day="bookings">預訂</div>
+  <div class="tab" data-day="todo">待辦</div>
+</div>
+
+<!-- D1 -->
+<div class="day-section active" id="d1">
+  <div class="day-header">
+    <h2>D1 · 4/30 週四</h2>
+    <div class="day-subtitle">抵達休息</div>
+  </div>
+  <div class="timeline">
+    <div class="event">
+      <div class="event-time">下午</div>
+      <div class="event-title">浦東機場抵達</div>
+      <div class="event-location">浦東國際機場 T1</div>
+      <div class="event-notes">接機回陸家嘴</div>
+    </div>
+    <div class="event">
+      <div class="event-time">晚上</div>
+      <div class="event-title">回家晚餐</div>
+      <div class="event-location">陸家嘴</div>
+    </div>
+    <div class="event optional">
+      <div class="event-time">晚上</div>
+      <div class="event-title">小區散步</div>
+      <div class="event-notes">輇)��走走</div>
+    </div>
+  </div>
+</div>
+
+<!-- D2 -->
+<div class="day-section" id="d2">
+  <div class="day-header">
+    <h2>D2 · 5/1 週五</h2>
+    <div class="day-subtitle">北外灘 + 蘇州河（勞動節）</div>
+  </div>
+  <div class="timeline">
+    <div class="event pending-item">
+      <div class="event-time">09:45</div>
+      <div class="event-title">上海大廈露台</div>
+      <div class="event-location">北蘇州路20號</div>
+      <div class="event-notes">
+        <span class="badge badge-yellow">待確認</span> 10:00開始，需提前到確保名額<br>
+        需電話確誎開放方式（+86 21 5109 5554）
+      </div>
+    </div>
+    <div class="event optional">
+      <div class="event-time">~10:30</div>
+      <div class="event-title">外白渡橋 + 上海郵政博物館（可選）</div>
+      <div class="event-location">天潼路395號 · 10/12號線 天潼路站3號口</div>
+      <div class="event-notes">
+        <span class="badge badge-green">已確認</span> 週二至週日 9:00-17:00 · 免費免預約
+      </div>
+    </div>
+    <div class="event confirmed">
+      <div class="event-time">12:00</div>
+      <div class="event-title">午餐 Polux</div>
+      <div class="event-location">新天地北里 太倉路181弄5號</div>
+      <div class="event-notes">
+        <span class="badge badge-green">已訂</span> 法式小酒館
+      </div>
+    </div>
+    <div class="event confirmed">
+      <div class="event-time">14:00</div>
+      <div class="event-title">Fotografiska 影展</div>
+      <div class="event-location">光復路127號 · 10:30-23:00</div>
+      <div class="event-notes">
+        <span class="badge badge-green">已賷票</span><span class="badge badge-blue">大眾點評</span> ¥100<br>
+        新天地→Fotografiska 開車約15分鐘
+      </div>
+    </div>
+    <div class="event optional">
+      <div class="event-time">16:00</div>
+      <div class="event-title">蘇州河畔散步（可選）</div>
+      <div class="event-notes">看完展沿河走走</div>
+    </div>
+    <div class="event highlight">
+      <div class="event-time">18:00</div>
+      <div class="event-title">晚餐 荣家黃魚麵</div>
+      <div class="event-location">南京西路688號L105A（霜安）· 16:30-21:00</div>
+      <div class="event-notes">
+        <span class="badge badge-blue">米其林必比登</span> 新榮記集團 · 人均~¥138-157<br>
+        招牌黃魚麵¥138 · 離LV太古匯步行距離
+      </div>
+    </div>
+    <div class="event pending-item">
+      <div class="event-time">19:30</div>
+      <div class="event-title">LV路易號 @ 興業太古匯</div>
+      <div class="event-location">南京西路789號 · 10:00-22:00 · 免費</div>
+      <div class="event-notes">
+        <span class="badge badge-yellow">預約未開放</span> 持續關注 MY LV小程序
+      </div>
+    </div>
+  </div>
+  <div class="route-card">
+    <strong>路線：</strong>北外灘(上海大廈) → 新天地(Polux) → 蘇州河(Fotografiska) → 荣家黃魚麵 → 南京西路(LV)
+  </div>
+</div>
+
+<!-- D3 -->
+<div class="day-section" id="d3">
+  <div class="day-header">
+    <h2>D3 · 5/2 週六</h2>
+    <div class="day-subtitle">浦東美術館 + 法租界</div>
+  </div>
+  <div class="timeline">
+    <div class="event confirmed">
+      <div class="event-time">10:00</div>
+      <div class="event-title">MAP 浦東美術館</div>
+      <div class="event-location">濱江大道2777號 · 10:00-21:00</div>
+      <div class="event-notes">
+        <span class="badge badge-green">已購票</span><span class="badge badge-blue">攜程</span> 離家超近！<br>
+        🎨 畢卡索展（至5/3）+ 羅浮宮展（至5/6）<br>
+        充裕時間看兩個展（2-3小時）
+      </div>
+    </div>
+    <div class="event highlight">
+      <div class="event-time">12:30</div>
+      <div class="event-title">午餐 雲和麵館</div>
+      <div class="event-location">華山路1623號 或 長樂路344號</div>
+      <div class="event-notes">
+        <span class="badge badge-blue">米其林推介</span> 本幫麵 · 人均~¥35-50<br>
+        MAP→雲和 開�車約25分鐘
+      </div>
+    </div>
+    <div class="event warning">
+      <div class="event-time">14:00</div>
+      <div class="event-title">上海交響樂博物館</div>
+      <div class="event-location">寶慶跨3號 · 免費· 週二至週六 9:30-16:30</div>
+      <div class="event-notes">
+        <span class="badge badge-red">4/29搶預約</span> 「地產寶慶」公眾號<br>
+        提前3天搶 · 每日限80人（上下午各40）<br>
+        帶身份證或護照 · 約1小時
+      </div>
+    </div>
+    <div class="event confirmed">
+      <div class="event-time">16:30</div>
+      <div class="event-title">Prada榮宅 下午茶</div>
+      <div class="event-location">陝西北路186號 · 10:00-22:00</div>
+      <div class="event-notes">
+        <span class="badge badge-green">已訂 16:30</span><span class="badge badge-blue">Prada榮宅小程序</span>
+      </div>
+    </div>
+    <div class="event">
+      <div class="event-time">18:00</div>
+      <div class="event-title">回家休息</div>
+    </div>
+    <div class="event">
+      <div class="event-time">19:00</div>
+      <div class="event-title">回家晚餐</div>
+      <div class="event-location">陸家嘴</div>
+      <div class="event-notes">在家輕鬆吃</div>
+    </div>
+    <div class="event optional">
+      <div class="event-time">20:00</div>
+      <div class="event-title">江邊散步</div>
+      <div class="event-location">陸家嘴濱江</div>
+    </div>
+  </div>
+  <div class="route-card">
+    <strong>路線：</strong>陸家嘴(MAP) → 過河 → 法租界(雲和) → 寶慶路(交響樂博物館) → 靜安(榮宅) → 回浦東<br>
+    💡 下午三站都在法租界/靜安，步行距離內！
+  </div>
+</div>
+
+<!-- D4 -->
+<div class="day-section" id="d4">
+  <div class="day-header">
+    <h2>D4 · 5/3 週日</h2>
+    <div class="day-subtitle">西岸 + 達利 + 榮焰</div>
+  </div>
+  <div class="timeline">
+    <div class="event highlight">
+      <div class="event-time">10:00</div>
+      <div class="event-title">龍美術館西岸</div>
+      <div class="event-location">龍騰大道3398號 · 10:00-21:00</div>
+      <div class="event-notes">
+        <span class="badge badge-yellow">現場買票</span> 不支持線上購票<br>
+        🎨 回響：她們的世紀 — 全球女性藝術特展（3/10-5/31）
+      </div>
+    </div>
+    <div class="event">
+      <div class="event-time">12:00</div>
+      <div class="event-title">午餐（西岸附近或回家）</div>
+      <div class="event-notes">西岸有不少餐廳，可臨時決定</div>
+    </div>
+    <div class="event">
+      <div class="event-time">13:00</div>
+      <div class="event-title">回家休息</div>
+      <div class="event-location">陸家嘴</div>
+      <div class="event-notes">充分休息</div>
+    </div>
+    <div class="event confirmed">
+      <div class="event-time">15:30</div>
+      <div class="event-title">達利展「啟程」@ 老市府</div>
+      <div class="event-location">福州路200號 · 週二至週日 10:00-18:00（最後入場17:30）</div>
+      <div class="event-notes">
+        <span class="badge badge-green">已購票</span><span class="badge badge-blue">貓眼</span> ¥118<br>
+        已延期至5/10 · 155件作品 · 約1.5-2小時
+      </div>
+    </div>
+    <div class="event optional">
+      <div class="event-time">17:30</div>
+      <div class="event-title">外灘源散步</div>
+      <div class="event-location">圓明園路</div>
+      <div class="event-notes">安培洋行等歷史建築<br>老市府→外灘源→榮焰 步行可達！</div>
+    </div>
+    <div class="event confirmed">
+      <div class="event-time">18:30</div>
+      <div class="event-title">晚餐 榮焰板前</div>
+      <div class="event-location">虎丘路28號</div>
+      <div class="event-notes">
+        <span class="badge badge-green">已訂 6:30PM</span> ~¥2,145/人
+      </div>
+    </div>
+  </div>
+  <div class="route-card">
+    <strong>路線：</strong>西岸(龍美術館) → 回浦東休息 → 人民廣場(達利展) → 外灘源 → 榮焰(虎丘路)<br>
+    💡 下午三站（老市府→外灘源→榮焰）都在外灘一帶，非常順路！
+  </div>
+</div>
+
+<!-- D5 -->
+<div class="day-section" id="d5">
+  <div class="day-header">
+    <h2>D5 · 5/4 週一</h2>
+    <div class="day-subtitle">旗袍展 + 回家</div>
+  </div>
+  <div class="timeline">
+    <div class="event highlight">
+      <div class="event-time">09:00</div>
+      <div class="event-title">上博旗袍展「摩登華影」</div>
+      <div class="event-location">人民大道201號 · 免費 · 9:00-17:00</div>
+      <div class="event-notes">
+        <span class="badge badge-green">假期開放</span><span class="badge badge-red">展期至5/5</span><br>
+        1,500sqm · 306件展品 · 建議2-3小時
+      </div>
+    </div>
+    <div class="event highlight">
+      <div class="event-time">11:00</div>
+      <div class="event-title">午餐 莱莱小籠·喬艾</div>
+      <div class="event-location">天津路506號（上博走路5分鐘）· 08:00-14:00</div>
+      <div class="event-notes">
+        <span class="badge badge-yellow">不接受預約</span> 現場排隊！週一人可能比週日少<br>
+        備選：人民廣場附近簡餐（如果排隊太長）
+      </div>
+    </div>
+    <div class="event">
+      <div class="event-time">12:30</div>
+      <div class="event-title">回家、打包</div>
+    </div>
+    <div class="event warning">
+      <div class="event-time">14:00</div>
+      <div class="event-title">前往虹橋機場</div>
+      <div class="event-notes">
+        陸家嘴→虹橋T1 約45-60分鐘（假期可能塞車）
+      </div>
+    </div>
+    <div class="event confirmed">
+      <div class="event-time">16:15</div>
+      <div class="event-title">CI 202 飛台北</div>
+      <div class="event-location">虹橋T1</div>
+      <div class="event-notes">
+        <span class="badge badge-green">已訂</span> 建議提前2小時到
+      </div>
+    </div>
+  </div>
+  <div class="route-card">
+    <strong>路線：</strong>人民廣場(上博) → 回浦東打包 → 虹橋機場<br>
+    💡 備選：如時間緊，可早上先打包行李帶出門，上博後直奔虹橋（約30-40分鐘）
+  </div>
+</div>
+
+<!-- Bookings -->
+<div class="day-section" id="bookings">
+  <div class="section-title" style="padding-left:0">✅ 已確認預訂</div>
+
+  <div class="booking-card">
+    <div class="booking-info">
+      <div class="booking-name">Polux 午餐</div>
+      <div class="booking-detail">5/1 Fri 12:00</div>
+    </div>
+    <div class="booking-status status-confirmed">已訂</div>
+  </div>
+
+  <div class="booking-card">
+    <div class="booking-info">
+      <div class="booking-name">Fotografiska 門票</div>
+      <div class="booking-detail">5/1 Fri 14:00</div>
+      <div class="booking-platform">大眾點評</div>
+    </div>
+    <div class="booking-status status-confirmed">已購票</div>
+  </div>
+
+  <div class="booking-card">
+    <div class="booking-info">
+      <div class="booking-name">MAP 浦東美術館 門票</div>
+      <div class="booking-detail">5/2 Sat 10:00</div>
+      <div class="booking-platform">攜程</div>
+    </div>
+    <div class="booking-status status-confirmed">已購票</div>
+  </div>
+
+  <div class="booking-card">
+    <div class="booking-info">
+      <div class="booking-name">Prada榮宅 下午茶</div>
+      <div class="booking-detail">5/2 Sat 16:30</div>
+      <div class="booking-platform">Prada榮宅小程序</div>
+    </div>
+    <div class="booking-status status-confirmed">已訂</div>
+  </div>
+
+  <div class="booking-card">
+    <div class="booking-info">
+      <div class="booking-name">達利展 門票</div>
+      <div class="booking-detail">5/3 Sun 15:30</div>
+      <div class="booking-platform">貓眼</div>
+    </div>
+    <div class="booking-status status-confirmed">已購票</div>
+  </div>
+
+  <div class="booking-card">
+    <div class="booking-info">
+      <div class="booking-name">榮焰板前 晚餐</div>
+      <div class="booking-detail">5/3 Sun 18:30</div>
+    </div>
+    <div class="booking-status status-confirmed">已訂</div>
+  </div>
+
+  <div class="booking-card">
+    <div class="booking-info">
+      <div class="booking-name">CI 202 飛台北</div>
+      <div class="booking-detail">5/4 Mon 16:15 · 虹橋T1</div>
+    </div>
+    <div class="booking-status status-confirmed">已訂</div>
+  </div>
+
+  <div class="section-title" style="padding-left:0;margin-top:16px">❌ 已取消</div>
+
+  <div class="booking-card" style="opacity:0.6">
+    <div class="booking-info">
+      <div class="booking-name" style="text-decoration:line-through">Nono's 晚餐 (5/1)</div>
+      <div class="booking-detail">取消，改訂 Polux 午餐</div>
+    </div>
+  </div>
+  <div class="booking-card" style="opacity:0.6">
+    <div class="booking-info">
+      <div class="booking-name" style="text-decoration:line-through">GAF 插畫藝術節</div>
+      <div class="booking-detail">不去了</div>
+    </div>
+  </div>
+</div>
+
+<!-- Todo -->
+<div class="day-section" id="todo">
+  <div class="section-title" style="padding-left:0">待辦事項</div>
+
+  <div class="todo-card">
+    <div class="todo-icon">⏰</div>
+    <div class="todo-text">
+      <div class="todo-title">交響樂博物館 預約</div>
+      <div class="todo-desc">「地產寶慶」公眾號 · 4/29 早上7:00搶（提前3天搶5/2）· 每日限80人</div>
+    </div>
+  </div>
+
+  <div class="todo-card">
+    <div class="todo-icon">📞</div>
+    <div class="todo-text">
+      <div class="todo-title">上海大廈露台 開放方式</div>
+      <div class="todo-desc">需電話確認：+86 21 5109 5554</div>
+    </div>
+  </div>
+
+  <div class="todo-card">
+    <div class="todo-icon">👀</div>
+    <div class="todo-text">
+      <div class="todo-title">LV路易號 預約</div>
+      <div class="todo-desc">預約尚未開放 · 持續關注 MY LV小程序</div>
+    </div>
+  </div>
+
+  <div class="section-title" style="padding-left:0;margin-top:16px">✅ 已完成</div>
+
+  <div class="todo-card todo-done">
+    <div class="todo-icon">✅</div>
+    <div class="todo-text">
+      <div class="todo-title">Prada榮宅 下午茶預約</div>
+      <div class="todo-desc">已訂 5/2 16:30</div>
+    </div>
+  </div>
+  <div class="todo-card todo-done">
+    <div class="todo-icon">✅</div>
+    <div class="todo-text">
+      <div class="todo-title">郵政博物館 週五開放</div>
+      <div class="todo-desc">週二至週日 9:00-17:00 · 免費免預約</div>
+    </div>
+  </div>
+  <div class="todo-card todo-done">
+    <div class="todo-icon">✅</div>
+    <div class="todo-text">
+      <div class="todo-title">龍美術館 5月展覽</div>
+      <div class="todo-desc">回響：她們的世紀（3/10-5/31）全球女性藝術特展</div>
+    </div>
+  </div>
+  <div class="todo-card todo-done">
+    <div class="todo-icon">✅</div>
+    <div class="todo-text">
+      <div class="todo-title">上博 5/4(週一) 是否開放</div>
+      <div class="todo-desc">五一假期開放（已確認）</div>
+    </div>
+  </div>
+  <div class="todo-card todo-done">
+    <div class="todo-icon">✅</div>
+    <div class="todo-text">
+      <div class="todo-title">荣家黃魚麵</div>
+      <div class="todo-desc">南京西路688號 · 16:30-21:00 · ~¥138/人</div>
+    </div>
+  </div>
+  <div class="todo-card todo-done">
+    <div class="todo-icon">✅</div>
+    <div class="todo-text">
+      <div class="todo-title">達利展門票</div>
+      <div class="todo-desc">已購票（貓眼）¥118/人</div>
+    </div>
+  </div>
+  <div class="todo-card todo-done">
+    <div class="todo-icon">✅</div>
+    <div class="todo-text">
+      <div class="todo-title">MAP 門票</div>
+      <div class="todo-desc">已購票（攜程）</div>
+    </div>
+  </div>
+  <div class="todo-card todo-done">
+    <div class="todo-icon">✅</div>
+    <div class="todo-text">
+      <div class="todo-title">Fotografiska 門票</div>
+      <div class="todo-desc">已購票（大眾點評）¥100</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  上海五一行程表 v3 · Updated 2026-04-12
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const sections = document.querySelectorAll('.day-section');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.day;
+      tabs.forEach(t => t.classList.remove('active'));
+      sections.forEach(s => s.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(target).classList.add('active');
+      window.scrollTo(0, 0);
+    });
+  });
+</script>
+</body>
+</html>

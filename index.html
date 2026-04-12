@@ -252,6 +252,44 @@
   .todo-desc { font-size: 12px; color: var(--muted); }
   .todo-done .todo-title { text-decoration: line-through; color: var(--muted); }
 
+  /* XHS link */
+  .xhs-link {
+    display: inline-block;
+    font-size: 13px;
+    text-decoration: none;
+    margin-left: 6px;
+    vertical-align: middle;
+    background: #ff2442;
+    color: white;
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 0.3px;
+    line-height: 1.4;
+  }
+  .xhs-link:active { opacity: 0.7; }
+
+  /* Photo section */
+  .photo-section {
+    text-align: center;
+    padding: 16px 16px 4px;
+  }
+  .photo-section img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255,255,255,0.8);
+    box-shadow: 0 4px 20px rgba(212,20,90,0.25);
+  }
+  .photo-caption {
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
   /* Footer */
   .footer {
     text-align: center;
@@ -282,8 +320,9 @@
 <div class="hero">
   <div class="hero-emoji">&#x1F382;&#x1F389;</div>
   <h1>爸爸77歲生日慶生之旅</h1>
-  <div class="subtitle">4/30 – 5/4, 2026 &#x2502; 上海五日 &#x2502; v3</div>
+  <div class="subtitle">4/30 – 5/4, 2026 &#x2502; 上海五日 &#x2502; v4</div>
   <div class="subtitle2">&#x2728; 爸媽來上海，一起過生日！&#x2728;</div>
+  <div class="photo-section" id="family-photo"></div>
 </div>
 
 <div class="tabs" id="tabs">
@@ -331,7 +370,7 @@
   <div class="timeline">
     <div class="event pending-item">
       <div class="event-time">09:45</div>
-      <div class="event-title">上海大廈露台</div>
+      <div class="event-title">上海大廈露台 <a href="https://www.xiaohongshu.com/explore/67fd27bc000000001b038a7b" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">北蘇州路20號</div>
       <div class="event-notes">
         <span class="badge badge-yellow">待確認</span> 10:00開始，需提前到確保名額<br>
@@ -340,7 +379,7 @@
     </div>
     <div class="event optional">
       <div class="event-time">~10:30</div>
-      <div class="event-title">外白渡橋 + 上海郵政博物館（可選）</div>
+      <div class="event-title">外白渡橋 + 上海郵政博物館（可選）<a href="https://www.xiaohongshu.com/explore/6973375d000000000e03d1f6" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">天潼路395號 &#xB7; 10/12號線 天潼路站3號口</div>
       <div class="event-notes">
         <span class="badge badge-green">已確認</span> 週二至週日 9:00-17:00 &#xB7; 免費免預約
@@ -348,7 +387,7 @@
     </div>
     <div class="event confirmed">
       <div class="event-time">12:00</div>
-      <div class="event-title">午餐 Polux</div>
+      <div class="event-title">午餐 Polux <a href="https://www.xiaohongshu.com/explore/69280c93000000000d03b43d" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">新天地北里 太倉路181弄5號</div>
       <div class="event-notes">
         <span class="badge badge-green">已訂</span> 法式小酒館
@@ -356,7 +395,7 @@
     </div>
     <div class="event confirmed">
       <div class="event-time">14:00</div>
-      <div class="event-title">Fotografiska 影展</div>
+      <div class="event-title">Fotografiska 影展 <a href="https://www.xiaohongshu.com/explore/69be474800000000220244f2" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">光復路127號 &#xB7; 10:30-23:00</div>
       <div class="event-notes">
         <span class="badge badge-green">已購票</span><span class="badge badge-blue">大眾點評</span> &#xA5;100<br>
@@ -370,7 +409,7 @@
     </div>
     <div class="event highlight">
       <div class="event-time">18:00</div>
-      <div class="event-title">晚餐 荣家黃魚麵</div>
+      <div class="event-title">晚餐 荣家黃魚麵 <a href="https://www.xiaohongshu.com/explore/68f3688200000000040120fd" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">南京西路688號L105A（靜安）&#xB7; 16:30-21:00</div>
       <div class="event-notes">
         <span class="badge badge-blue">米其林必比登</span> 新榮記集團 &#xB7; 人均~&#xA5;138-157<br>
@@ -379,7 +418,7 @@
     </div>
     <div class="event pending-item">
       <div class="event-time">19:30</div>
-      <div class="event-title">LV路易號 @ 興業太古匯</div>
+      <div class="event-title">LV路易號 @ 興業太古匯 <a href="https://www.xiaohongshu.com/explore/68cd24d9000000001203fa97" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">南京西路789號 &#xB7; 10:00-22:00 &#xB7; 免費</div>
       <div class="event-notes">
         <span class="badge badge-yellow">預約未開放</span> 持續關注 MY LV小程序
@@ -400,7 +439,7 @@
   <div class="timeline">
     <div class="event confirmed">
       <div class="event-time">10:00</div>
-      <div class="event-title">MAP 浦東美術館</div>
+      <div class="event-title">MAP 浦東美術館 <a href="https://www.xiaohongshu.com/explore/69c24879000000002102ecf3" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">濱江大道2777號 &#xB7; 10:00-21:00</div>
       <div class="event-notes">
         <span class="badge badge-green">已購票</span><span class="badge badge-blue">攜程</span> 離家超近！<br>
@@ -410,7 +449,7 @@
     </div>
     <div class="event highlight">
       <div class="event-time">12:30</div>
-      <div class="event-title">午餐 雲和麵館</div>
+      <div class="event-title">午餐 雲和麵館 <a href="https://www.xiaohongshu.com/explore/68ff311f000000000700f44e" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">華山路1623號 或 長樂路344號</div>
       <div class="event-notes">
         <span class="badge badge-blue">米其林推介</span> 本幫麵 &#xB7; 人均~&#xA5;35-50<br>
@@ -419,7 +458,7 @@
     </div>
     <div class="event warning">
       <div class="event-time">14:00</div>
-      <div class="event-title">上海交響樂博物館</div>
+      <div class="event-title">上海交響樂博物館 <a href="https://www.xiaohongshu.com/explore/69bc0769000000001f006777" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">寶慶路3號 &#xB7; 免費 &#xB7; 週二至週六 9:30-16:30</div>
       <div class="event-notes">
         <span class="badge badge-red">4/29搶預約</span> 「地產寶慶」公眾號<br>
@@ -429,7 +468,7 @@
     </div>
     <div class="event confirmed">
       <div class="event-time">16:30</div>
-      <div class="event-title">Prada榮宅 下午茶</div>
+      <div class="event-title">Prada榮宅 下午茶 <a href="https://www.xiaohongshu.com/explore/69ccd1060000000022025d8d" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">陝西北路186號 &#xB7; 10:00-22:00</div>
       <div class="event-notes">
         <span class="badge badge-green">已訂 16:30</span><span class="badge badge-blue">Prada榮宅小程序</span>
@@ -452,7 +491,7 @@
     </div>
   </div>
   <div class="route-card">
-    <strong>路線：</strong>陸家嘴(MAP) &#x2192; 過河 &#x2192; 法租界(雲和) &#x2192; 寶慶路(交響樂博物館) &#x2192; 靜安(榮宅) &#x2192; 回浦東<br>
+    <strong>路線：</strong>陸家嘴(MAP) &#x2192; 過河 &#x2192; 法租界(雲和) &#x2192; 寶慺路(交響樂博物館) &#x2192; 靜安(榮宅) &#x2192; 回浦東<br>
     &#x1F4A1; 下午三站都在法租界/靜安，步行距離內！
   </div>
 </div>
@@ -466,7 +505,7 @@
   <div class="timeline">
     <div class="event highlight">
       <div class="event-time">10:00</div>
-      <div class="event-title">龍美術館西岸</div>
+      <div class="event-title">龍美術館西岸 <a href="https://www.xiaohongshu.com/explore/69ba8e44000000002301637c" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">龍騰大道3398號 &#xB7; 10:00-21:00</div>
       <div class="event-notes">
         <span class="badge badge-yellow">現場買票</span> 不支持線上購票<br>
@@ -486,7 +525,7 @@
     </div>
     <div class="event confirmed">
       <div class="event-time">15:30</div>
-      <div class="event-title">達利展「啟程」@ 老市府</div>
+      <div class="event-title">達利展「啟程」@ 老市府 <a href="https://www.xiaohongshu.com/explore/691fe727000000000d035144" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">福州路200號 &#xB7; 週二至週日 10:00-18:00（最後入場17:30）</div>
       <div class="event-notes">
         <span class="badge badge-green">已購票</span><span class="badge badge-blue">貓眼</span> &#xA5;118<br>
@@ -495,13 +534,13 @@
     </div>
     <div class="event optional">
       <div class="event-time">17:30</div>
-      <div class="event-title">外灘源散步</div>
+      <div class="event-title">外灘源散步 <a href="https://www.xiaohongshu.com/explore/69a122d9000000002801c53c" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">圓明園路</div>
       <div class="event-notes">安培洋行等歷史建築<br>老市府&#x2192;外灘源&#x2192;榮焰 步行可達！</div>
     </div>
     <div class="event confirmed">
       <div class="event-time">18:30</div>
-      <div class="event-title">晚餐 榮焰板前</div>
+      <div class="event-title">晚餐 榮焰板前 <a href="https://www.xiaohongshu.com/explore/67585359000000000700923b" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">虎丘路28號</div>
       <div class="event-notes">
         <span class="badge badge-green">已訂 6:30PM</span> ~&#xA5;2,145/人
@@ -523,7 +562,7 @@
   <div class="timeline">
     <div class="event highlight">
       <div class="event-time">09:00</div>
-      <div class="event-title">上博旗袍展「摩登華影」</div>
+      <div class="event-title">上博旗袍展「摩登華影」<a href="https://www.xiaohongshu.com/explore/693a3a36000000001e03833e" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">人民大道201號 &#xB7; 免費 &#xB7; 9:00-17:00</div>
       <div class="event-notes">
         <span class="badge badge-green">假期開放</span><span class="badge badge-red">展期至5/5</span><br>
@@ -532,7 +571,7 @@
     </div>
     <div class="event highlight">
       <div class="event-time">11:00</div>
-      <div class="event-title">午餐 莱莱小籠&#xB7;喬艾</div>
+      <div class="event-title">午餐 莱莱小籠&#xB7;喬艾 <a href="https://www.xiaohongshu.com/explore/6955d295000000001e027e27" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">天津路506號（上博走路5分鐘）&#xB7; 08:00-14:00</div>
       <div class="event-notes">
         <span class="badge badge-yellow">不接受預約</span> 現場排隊！週一人可能比週日少<br>
@@ -719,7 +758,7 @@
 </div>
 
 <div class="footer">
-  &#x1F382; 爸爸77歲生日慶生之旅 v3 &#xB7; Updated 2026-04-12
+  &#x1F382; 爸爸77歲生日慶生之旅 v4 &#xB7; Updated 2026-04-13
 </div>
 
 <script>

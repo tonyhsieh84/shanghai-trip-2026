@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>爸爸77歲生日上海慶生之旅</title>
+<title>謝貞銘醫師77大壽上海行！</title>
 <style>
   :root {
     --bg: #fef7f0;
@@ -39,10 +39,15 @@
   .hero {
     background: linear-gradient(135deg, var(--header-from) 0%, #e8458b 40%, var(--header-to) 100%);
     color: white;
-    padding: 28px 16px 24px;
-    text-align: center;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
     position: relative;
     overflow: hidden;
+  }
+  .hero-content {
+    text-align: left;
   }
   .hero::before {
     content: '';
@@ -60,10 +65,8 @@
     background: rgba(255,255,255,0.08);
     border-radius: 50%;
   }
-  .hero-emoji { font-size: 36px; margin-bottom: 4px; }
-  .hero h1 { font-size: 22px; font-weight: 800; margin-bottom: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-  .hero .subtitle { font-size: 14px; opacity: 0.92; }
-  .hero .subtitle2 { font-size: 12px; opacity: 0.75; margin-top: 4px; }
+  .hero h1 { font-size: 20px; font-weight: 800; margin-bottom: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+  .hero .subtitle { font-size: 13px; opacity: 0.92; }
 
   /* Tab navigation */
   .tabs {
@@ -272,23 +275,18 @@
 
   /* Photo section */
   .photo-section {
-    text-align: center;
-    padding: 16px 16px 4px;
+    flex-shrink: 0;
   }
   .photo-section img {
-    width: 140px;
-    height: 140px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid rgba(255,255,255,0.8);
+    border: 3px solid rgba(255,255,255,0.8);
     box-shadow: 0 4px 20px rgba(212,20,90,0.25);
+    display: block;
   }
-  .photo-caption {
-    font-size: 13px;
-    color: rgba(255,255,255,0.9);
-    margin-top: 8px;
-    font-weight: 500;
-  }
+  .photo-caption { display: none; }
 
   /* Footer */
   .footer {
@@ -318,11 +316,11 @@
 <body>
 
 <div class="hero">
-  <div class="hero-emoji">&#x1F382;&#x1F389;</div>
-  <h1>爸爸77歲生日慶生之旅</h1>
-  <div class="subtitle">4/30 – 5/4, 2026 &#x2502; 上海五日 &#x2502; v5</div>
-  <div class="subtitle2">&#x2728; 爸媽來上海，一起過生日！&#x2728;</div>
   <div class="photo-section" id="family-photo"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAC0ALQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDgwntS7farATijZTsRcg2H0FBQ+1WQntQUosFyrs9qXZU4TNL5dFguV9lBXirGzikKcUWC5W20pSpgmafs4osO5HJbeXbxTbw3mk/KM5XHr2qLbVuQkwInZCcfjURShIGyErQq8j61MUoVOR9aLCuUmX5j9aTbxUpHzt9TS7eKlGhra+Mahbe1pD/6BXQ+HP8AkFJ/vtWDr4/4mMH/AF6Q/wDoFb/hwf8AEqT/AH2qYfChy+I1sUhFOxSEVYhhFS2w+dvpUZFTWo+dvpQtxPYsgUU4CitDM82WPigR1aVOKTZVcpjzEIjpGjq1s6UjJmiw+YqBOaXZwalC/NS7aVh8xBspCmFNTlaRl4NFh3KwXmnsny0oFPYfLSsO5ARw3tikK8Cp2QeVu7k81GRxRYLkZWhF+YfWnmljHzj6igLmcRiZh/tGpdvy1ZaNYJy4yZC5IwexNNbALKYwoHckmsUdDRf8QL/xMoP+vWH/ANArf8Oj/iVJ/vtXM3GoJdTRvMPnWNY9wHGAMCur0AD+zFwcje1OOisKW9zRxQRT8UhFMRERU9qPnb6VGRU1qPmb6U1uJ7FkCinYorQzODVaQripgvFBXitrHJcjC4xSMtS7aaR1pWKuVivNIwAGT2qZhzVK9c58tTkkZPsKmTsi4LmdiOS7jX7oLH2qD7fhsPGQp7ioHA5yM46+1NfBjwCePbpWDmzpVNGkrK4DKQQe4p7jis3TWkMzKASuMt7e9abdK0i7oykuViuv+jL/ALx/pULDgVIZCyGMgYQgj8f/ANVMboKdibkbCp7GMS3CoSQWOBj17VE1anhqAS6ojMQFi+bnue1KWiKhq0i4vh64ctuVVzxkmq2qaF5NsZGmyF6jtXYSTRoCN4yOorD1kefbH5lADZIJ61yOTud6grHGmNIxgZJrp/CLE21wu7IDgj8RWH9nW4JjiVmfGTt5wPUnoK6HwnatBYTeYu1zMQfwAxVx3MpLQ3cUhFSY4ppFaEEZFT2o+ZvpURFT2o+ZvpTW4nsWMUU7FFWZnEYpCOKkI60wiug4gph6mpKjPU0irkT8flWYLiLznPfHU1qN1rPu7KMyJKBtUsPMx6etZVE7G1GSTsyhNJGZNpXjBzW54e0uG8tnkYuuDjPtVybwtBdLI1q7xsv3d3Kv6Y74rZ0K2aDSIo3QxuuQwx3zXG5JrQ9GMHF6mFOtvb+ZBbWjR5QnJAywHfHWs1gcDIIPoa6G4Fta6wJJRztJYgZJPvWLetG1xIYh+7z8tXh3dtEYuKUUyoPvyf8AAf60jdqU9ZT6Baa3auo4AYV0fhsLc27RAlHiGCRxnJyPy5rnHqzpV69ldLIrEISA4HcVE43RdKajK7O3S1SQMu498+9ZV1p1nbA/u923+8Sa1FDedujQMzDG9nPArP1fESks2Se1cMr2PVilco2CbpcRKqKJFdgB2HNaujyedaO+cgysB9BwP0rnIriRC4RiocbWx3Fb3h7jTFH+239K0ordmWIla0TUxSEU6kIrc5hhFTWv3m+lUri7igba5Yt6KM1A+rxQ2rzQ4Z+Aqvxnmkpxva5bpT5ea2hvCiuNl8V3aSFRFb8fU/1orQ57jT1NMbpmnE8mmP8AdroOIU1H3NPzUfekMY/WkPSnOafBby3LiOFC7HjjoKVy0m9jX8OtI0bxtIWRGBRf7o5/wrWuZ9qkAYOKbpVgunxlC2+VxknHHHYUt4EVGaRiFA7VwVLXfKetSvZcxzl3p8vz3LS/O55BAIx+PSsZz1571oTSvNPtO5g2eOwrK8q5W7EWSw3ben5UqM1G9x4ijKrZR6B3k/4D/WmMelaKWTSymEL+8IPzdjtzWc4IOCCCOxrrhNS2OCrRnSa5hW6U+0t5Z2IjQtg8nsPxrTsNOilhSWYMxbJCk4HWtRY1jQBVCr2UcU2yYw7lmyvp1tUilCGRBtLjOOO+PpVS9sLmVi0kocdsU9MhcnAPtWjaq7adFuYcKR+GeK4a6jFI9PDOUmzmntGQgDnIzT9Nu7jTx5KkPGDyrdvoa2ZUDPhUwFUAMfasqUCMyOUZxn7qjJNGH1vYeLi4WubMWqxMP3sbxn8xVyOaOZcxOrj2Nc7Z7ntwZMZ+uae42fOrFWHO4HBFdVjhuT6zex2QlDbmeSNnAU42j5RXLvq0LRCPyHIBz9+pL67e5W9kn+aRoQqN/dAYZ/PI/KoDaRXdjHJbgJIo6ep7g1ioJu50yrTjFRvodHa+Hra9tYrgzzAyKCcMG5+uKKs+FZt2hQgtypYH86K6UlY4m9TMJoJytR7snjmnhXZThGP0Bra5yWG5poPNOME7dIZD/wAANaGk6c5nM1xC4jToCvU/4VEppGtOlKb5Uh1npRmVXuMru5VBwSPU1O5k06+gjTLIwzgAKBnjFbaLkYPyhhwR1FZGv2rTGGVGP7rccepHT+tc1SXNE9WjRUJcqNZZVlt1dDnupPr71VuQt1F5bZDg5ZelZ2k36up2NlRxtzjn/HFaIaC6O/dkr3BwRXOpKSsb1KUqbKiWyfaJCiLkDbkDkdz/AEqldQLDJGU25BLHJ5x61sae8Utkrw52tnOeue+ayb0Kb4TElUjUpnPDE9R/KhxZVGcVK7ZVthi6mbcCyJKV/E8H/wAerHjtmnZQWJYvtyRir/2iNbP7WCdmBESePmzk8fhUWnN9s1QyKCkcfz7T/EegPtTp35tC8Q4+ztI3SqosarwAQo/LFVDIZb9Yx92MZNWLmTEZx1BB/WqunqXnuXP94iut7njrYsx/Nlj0FaNi2/SIiO61RkxFaseBhan0tiNDtvXbXJi9kelgFfmfp+pJcHEJ29TgfhnmsuP5mJ4xnmtGc5X6DNZG8pBKR1I4+vQU8L8LZOYfGl5CaexeCWTJ+aRmH0zxT7nMq7FOAeCfQdTTolEMKRL0AxUJ+aPcxO3eePWuroef1MWe4aBZ2RQ0bnBUjsDVVdTkTIWNQGGcKBV7hpEjChyGLEHpitHZa9raH/vgVyznyO51w95WZkWWs3Nlb+VAkaoSWweTk0VshLU/8u0H/fAorP25fJHsdKBjoAPpS5PqfzpcUYrl1LEq3C5SBQoBySTVWnpI0YO3HPtWlJqMrsd7F2OQPnIwQKzrpN8jA5EarkZOc1ZtJJHaQyRgY6bDnP51iavqlzBdDNvGI+gJY9/U103T2NbrWxz9hN5GpsoRmy4G0cZznP8ASukhsZI03QsWJByW4/T2rlmfyNe+QZMZAUZwGOOhPp1rrIGmt4zNdTRpGTysa4H59TUyRrGbbd9iO4vGt7Z0i2FxnKnjB/r0rJuklllQXFyEIAPlrwOe2Kfc3MDSvIiFRuB3HPJyOv61WifCeaCkefmyqZz+OapS02J9gnK6ZU1fZblVjb5J3LFcYwwxn881p6TD5UZbu4Bqja263kkwlPmRnjd6E46fTFallbtDCI5G3MvBI7jtVU3eVuxxYiyvYjvbhROkYclmYAhRkjnvVu3TyI2LcF2zj0rD1mbKuYyVjhwc5+++eBWgLxZrCOZOhIJ/OuhPU42i1qcm2xl+lW7DjSLVf9gGsvVC0lqYl+9LIsa/UmtoskUQXOFUBV+grixb1SPWy5e4/UiuTthb6Vj5BeOMnuX/AC/+uRV+6n8xAEGBnqazbZg97ctniICMfXqa2w6tTRyY13rPyHSFsjkgZ+nFR+biwkfP3Xf+dNuZQAx7AVBpbJc2ZEgZgJmO0HrW/U5Og+wt/Kt3mkGCVNNklWOFGAZmI9Papb66DSfZIV3v3C9qypz8iqxU4YjkE1hVitjei9S2LzAGU5PtiiqnmBFUcdPSisbI3PQ6KSiuYoWkNFFAFmx/1jf7tUNejR7eQMoORV6yP74j1U1m+IpNsYAzgnBreL9wcFeRgeHfIJLTwh5kOCSjFgAOParup3ak/OOF6Z4/Sq6sbm/8wEpgYc/oB9auKIB87rEzgfLu7e9aO50rki7dTB8qe8lBfcsROF9M4JpLzz4bRA7bQQcBWGD+nWujDG4VkEsSvH8wwM88jNYl7YW8ZWOSZ5JMEkseDg4PShO7K5fZxbTvcfogB09NrbmMhLe1XZ54wG2ysfXy0LY+p6VjSQPbfu1zErOI5Np7N0P0966u3ghEJeUBYUGAAcA+1a00opyZ5lVOU1FHNXOmSXCGeQsIQeGc5J+g6D61Hp4LaWLaM5cuVHtzXR3h860I8rywOI1HAA9/8K4vT7wW8twBkF2JX2pQldsKtNRijorqYJf2qcHaxf8AEDA/nWtFC9xt3Yx/Kuc0/N7qqHO5VGc+1dNK77fIgO1j95/7o/xrkxD5pnsYOHJQilu9SlqksUKu4YeXEpHHcj/69Y2mSYs2Y/6yQlm+po151M0djAPkTl8fpn+dRWp2DZj6V3Q+FI8StrUk/NjNQlCQtz2rTWzWOzAhUsoAxHGdu73J61kXkL3MsMEYYmQheBnFdDcLLBbAJDKqr8u5h1NXdLcys3sYVwl7EDHCkUSnqIxz+JNUzuVEU7sjOcNj/wDXUmo3cmS3SSNgPqKhZgyI3HOT93NYz1N6ejGXD/vAPYUUyb7/AOA/lRUWLb1PSfMpd9Vt+aXdXDc3sWd9JvqvupytlgKLhYu2j4lDEgKOCTV2aCOdSrqCD1BFc1BKbnTpmLlmklMY57Z4x+FXlvZUvnhTBihhVn6klj0A/D+ddsI2iVOlyuyeo7+wo4PM+zEoJDkqeR+HpVHUNHkaykWNC8xUDg8HkZ61tQ3ckm7CMdvXoRn061YS4RiUYbJSM7T/ABD2qkrkc84M5WLT7mIWshjKpCdz569B19ax/EEhFzHDyPLjz+fOa7ia5hWQndtZRljjj6GuU1y1ilmF6qFRuCun09fwpfDoaqTqNNmNeTSfbUMqtiSIAqAeh5H+NddaOlxbW+5Xdk6DHJP9PrWHqipeWyyrxLHj5l4+U+1W/D6y38sKiXasB81yv8RyQo/mT9KqLTWpFdcjTj/SNTU4bh7Rgkqxvg4Cjp7ZrzRlcTMr53BiG+tevSRRuGVjksvyk1xt3Yw3E9wzRgtEwRievI4qb8rMnHnXoR+HpxEGVIGZz1bcOldEs6KvKOnrxn+Vc3ZW0VvcLjcAT9a6qGTMY+YEY4PSsXS5ne52/XVFKPL+P/AOcuYozezyK4ZXO7PvVCSaNX2hsv6AVra7aXGA9ou95HKkKPu56Z/Wr/h/RI7OPzLjElweWJ6CuuGiSPKqe9NtDtCsGWI3Ei7ZXHCsMFV9/rTdSE5t3MTYJJAx0J+laUbsPtNwX/dkbUH071V2kHY5/wBTAWYn+8ayk29TpjFRVjgpne6MjyDDByGHpSt8qgDOASBzirGqRiO7EiMu2WFGYD1xzVV2XA6Zye2abdzJKzIpT+8NFMYOGO5Tk88UU7Cud8jlugJ+gqwkchHEb/lWmo2/xUu/HvXDyo35mZ4gl/uEfU05IigZ5MbVUnFXzKfSo5kDW0rYO8ZJz6YOK0hTTd10Kg9dTF0CPfaYIBAlJGfcD/69XtJjE1xfzY5afaPoowKk0y2FnYIAMPsDE++Kk0YBLPL/ACBiWOa609kdElpOV9XYsojW1sQTgKMn3zTlXepeY5TIMagc1Vu7p7mZYbdMoDlyePwq0CQgySzY4pLX0J5UlruUrpfKuPOihBEg2zZxyo6fjWFNGJ7xrZS4hABy3GB/d9+a6G5DNE+AG+XgZrn+HlwW3Mp5NQ9CowU1oy1HaxxRIrlFYdcHqKt6JZx21rLLDGQ0shYrnpg4AH+e9VIYdzRmQbVf5sAVpadKMTpzkSFsH3/+uDVRabMKsWqa1u0FzfRWiysyO3lNuCgckEc4rBluh9iuJgqg3TEkHnYF45966C4IPUDB456H2rj9elFtOBGoWHa2QD3PrRK17GCbSuQ+eWUnOCOPcGrmnapGUAmkVSByw4//AFVzbXDvgLxwAT9KFiBHLMc9eaWxF2zvILxJkURfLFjIz1PvWnbSApgr8vTHrXD2DzDASTOOgbpW3b6ndR/JNasckBZI8EDnvTjUjcUos6Ka3EspwdoXB46Z+lZF9pr7pCbp/mwTx1+tbifdb3OKqaicFvXZmtZJWIUmcbqFsFiDsEIjO0giqKrbt1Rfyq9rSF9pX+I7v0rMSJq5pG6ZdWODaMKMUVCqNiis7vuWd/upQ1Q5pwrEZKD7029nWOOXafuxMTn0xTWdUjd26KpNZeoXAaC6j3L5sq7Vwc4z1zXTST5XYuHInzTdkbUIDaZG+SS8a/QcVFcv9lskjQZZht47GqNrqJaNIFiAwoG4t6D0pZXlmk+bbgHoK6XFpWRksRTcrt6FnTlVmZzuL4xk9Kv/AMLnOewHtWXwIiqEqV54OM07GU6t+dNRa0Y51YyT5VuX/LyhBYDjtXPXEXkzMu8Fsbhgdexq2wIBByaqDcAyg4DdRSlT5loRDFOHQmtLsN5ccg27TjJ6Yq2jeVcvJnchAQDv69qzfIVuBlj6VasL2MqYpl2SJ8vPIJx2rFU5RepbrwmnYfeTSlyQ6JEPbk/4Vymq2090S0cQYls793UY4610M8hIIf8AeD12/wBKrZDLjirgm5WkYVZWp3hqc1HpV43SIf8AfQqxHo94PvKgH+/W/CQrjip3dY13HG361Uo62FSlzRuzIhtXtyNwGfatOJ/kDdqqyTeYxKgY7E1JbQpPkOSxBzt6D8qn2EWQ68k7I3rfVLd2VAW45LYyBUd/cRNKMNkbSDxUMUKqGUAADoBSXKrn8K35bmfO0Yd0C0ajaSVJ/KqRYDIrZl2qDgDPasy/XNuZccowyfY1jOjpzIuFe8uVojjI20VVjk+WiuRo67ndU4UUVkUZepXEvmmANtjwCcdTVJVFFFetQS5EeRiG3Udy3ZKBOtauxcZxyaKKqW5dL4RjKO1EPLkdjRRUm8dyK4Yh9vY1WlUA8UUVSM6u5Gqh2QH++P8AGqUirHqNwVHKyEgkk45NFFUYdDckRWU5A5NZTscOOoU8UUVBsyBmIk49KLUfaJZPN+YIcAdvrRRWdQ2oa2ElUB8+tTW7FZFYdc0UVqtjkl8TNKZ2R8qe1U5Z3c8kfhRRQNlYjL85pl0gOnXP+5RRRL4WKHxo51GIXrRRRXEekf/Z" alt="爸爸媽媽"><div class="photo-caption">&#x2728; 謝貞銘 &amp; 媽媽 &#x2728;</div></div>
+  <div class="hero-content">
+    <h1>謝貞銘醫師77大壽上海行！</h1>
+    <div class="subtitle">4/30 – 5/4, 2026</div>
+  </div>
 </div>
 
 <div class="tabs" id="tabs">
@@ -382,7 +380,7 @@
       <div class="event-title">外白渡橋 + 上海郵政博物館（可選）<a href="https://www.xiaohongshu.com/explore/68c38714000000001d01159a?xsec_token=ABpTCwG8jpc6G4hA1VlURgv9uM61DyxrrW7tuDCTr2Qdc=&amp;xsec_source=pc_search" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">天潼路395號 &#xB7; 10/12號線 天潼路站3號口</div>
       <div class="event-notes">
-        <span class="badge badge-green">已確認</span> 週二至週日 9:00-17:00 &#xB7; 免費免預約
+        <span class="badge badge-green">已確認</span> 週二至週日 9:00-17:00 &#xB7; 免預約
       </div>
     </div>
     <div class="event confirmed">
@@ -398,7 +396,7 @@
       <div class="event-title">Fotografiska 影展 <a href="https://www.xiaohongshu.com/explore/69cba958000000001a0266c0?xsec_token=ABgJb4JmMYt2LAiFcNcsknOJnNjQop_ZljiBmg9dy_V_E=&amp;xsec_source=pc_search" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">光復路127號 &#xB7; 10:30-23:00</div>
       <div class="event-notes">
-        <span class="badge badge-green">已購票</span><span class="badge badge-blue">大眾點評</span> &#xA5;100<br>
+        <span class="badge badge-green">已購票</span><br>
         新天地&#x2192;Fotografiska 開車約15分鐘
       </div>
     </div>
@@ -412,14 +410,14 @@
       <div class="event-title">晚餐 荣家黃魚麵 <a href="https://www.xiaohongshu.com/explore/67b1ae44000000001800de82?xsec_token=ABAj_sZbc9qCfuMm-MXd3CNQ6ngqBlzqCgFH2PqW4Vmo0=&amp;xsec_source=pc_search" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">南京西路688號L105A（靜安）&#xB7; 16:30-21:00</div>
       <div class="event-notes">
-        <span class="badge badge-blue">米其林必比登</span> 新榮記集團 &#xB7; 人均~&#xA5;138-157<br>
-        招牌黃魚麵&#xA5;138 &#xB7; 離LV太古匯步行距離
+        <span class="badge badge-blue">米其林必比登</span> 新榮記集團<br>
+        招牌黃魚麵 &#xB7; 離LV太古匯步行距離
       </div>
     </div>
     <div class="event pending-item">
       <div class="event-time">19:30</div>
       <div class="event-title">LV路易號 @ 興業太古匯 <a href="https://www.xiaohongshu.com/explore/685c8e70000000002203ceab?xsec_token=ABHtCgo3lnm_GNNyDKtR-T0x0hvg0R6pWf-5E5mYZDVms=&amp;xsec_source=pc_search" target="_blank" class="xhs-link">小紅書</a></div>
-      <div class="event-location">南京西路789號 &#xB7; 10:00-22:00 &#xB7; 免費</div>
+      <div class="event-location">南京西路789號 &#xB7; 10:00-22:00</div>
       <div class="event-notes">
         <span class="badge badge-yellow">預約未開放</span> 持續關注 MY LV小程序
       </div>
@@ -452,14 +450,14 @@
       <div class="event-title">午餐 雲和麵館 <a href="https://www.xiaohongshu.com/explore/692fb29500000000190246f0?xsec_token=ABJ--yj-8qo9e191BJz-7v7-nH6KezHk_c0pMSXrleJ-k=&amp;xsec_source=pc_search" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">華山路1623號 或 長樂路344號</div>
       <div class="event-notes">
-        <span class="badge badge-blue">米其林推介</span> 本幫麵 &#xB7; 人均~&#xA5;35-50<br>
+        <span class="badge badge-blue">米其林推介</span> 本幫麵<br>
         MAP&#x2192;雲和 開車約25分鐘
       </div>
     </div>
     <div class="event warning">
       <div class="event-time">14:00</div>
       <div class="event-title">上海交響樂博物館 <a href="https://www.xiaohongshu.com/explore/69b2cb2a000000001b01cdb3?xsec_token=ABmUjE2K03vWN48fbbHQAnYQCuGDRCAWcaLRIAGlJGWs8=&amp;xsec_source=pc_search" target="_blank" class="xhs-link">小紅書</a></div>
-      <div class="event-location">寶慶路3號 &#xB7; 免費 &#xB7; 週二至週六 9:30-16:30</div>
+      <div class="event-location">寶慶路3號 &#xB7; 週二至週六 9:30-16:30</div>
       <div class="event-notes">
         <span class="badge badge-red">4/29搶預約</span> 「地產寶慶」公眾號<br>
         提前3天搶 &#xB7; 每日限80人（上下午各40）<br>
@@ -528,7 +526,7 @@
       <div class="event-title">達利展「啟程」@ 老市府 <a href="https://www.xiaohongshu.com/explore/6914542d0000000005012286?xsec_token=AB1RjJDbOV4YrK78flLBJnv9XB8H2m_bdxV56WBBsd3Bo=&amp;xsec_source=pc_search" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">福州路200號 &#xB7; 週二至週日 10:00-18:00（最後入場17:30）</div>
       <div class="event-notes">
-        <span class="badge badge-green">已購票</span><span class="badge badge-blue">貓眼</span> &#xA5;118<br>
+        <span class="badge badge-green">已購票</span><br>
         已延期至5/10 &#xB7; 155件作品 &#xB7; 約1.5-2小時
       </div>
     </div>
@@ -543,7 +541,7 @@
       <div class="event-title">晚餐 榮焰板前 <a href="https://www.xiaohongshu.com/explore/69628d53000000000b00a8c3?xsec_token=ABbCDpJlVHyNsVdks-PN0yB7ERAuwkaw8-fPVWq1L2MDI=&amp;xsec_source=pc_search" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">虎丘路28號</div>
       <div class="event-notes">
-        <span class="badge badge-green">已訂 6:30PM</span> ~&#xA5;2,145/人
+        <span class="badge badge-green">已訂 6:30PM</span>
       </div>
     </div>
   </div>
@@ -557,20 +555,20 @@
 <div class="day-section" id="d5">
   <div class="day-header">
     <h2>D5 &#xB7; 5/4 週一</h2>
-    <div class="day-subtitle">旗袍展 + 回家</div>
+    <div class="day-subtitle">旗袍展 + 午餐 + 機場</div>
   </div>
   <div class="timeline">
     <div class="event highlight">
-      <div class="event-time">09:00</div>
+      <div class="event-time">09:30</div>
       <div class="event-title">上博旗袍展「摩登華影」<a href="https://www.xiaohongshu.com/explore/698c3fd8000000001d01095b?xsec_token=ABq6y2s6P9oL41r-Do7_q3j3_zuqMmmHqgqRLhBzN7Joc=&amp;xsec_source=pc_search" target="_blank" class="xhs-link">小紅書</a></div>
-      <div class="event-location">人民大道201號 &#xB7; 免費 &#xB7; 9:00-17:00</div>
+      <div class="event-location">人民大道201號 &#xB7; 9:00-17:00</div>
       <div class="event-notes">
         <span class="badge badge-green">假期開放</span><span class="badge badge-red">展期至5/5</span><br>
         1,500sqm &#xB7; 306件展品 &#xB7; 建議2-3小時
       </div>
     </div>
     <div class="event highlight">
-      <div class="event-time">11:00</div>
+      <div class="event-time">12:00</div>
       <div class="event-title">午餐 莱莱小籠&#xB7;喬艾 <a href="https://www.xiaohongshu.com/explore/6955d295000000001e027e27?xsec_token=ABw0ISICJx41-o561eE-10_IZEsByvqqRu_I_bekdjVcs=&amp;xsec_source=pc_search" target="_blank" class="xhs-link">小紅書</a></div>
       <div class="event-location">天津路506號（上博走路5分鐘）&#xB7; 08:00-14:00</div>
       <div class="event-notes">
@@ -578,15 +576,11 @@
         備選：人民廣場附近簡餐（如果排隊太長）
       </div>
     </div>
-    <div class="event">
-      <div class="event-time">12:30</div>
-      <div class="event-title">回家、打包</div>
-    </div>
     <div class="event warning">
-      <div class="event-time">14:00</div>
+      <div class="event-time">13:30</div>
       <div class="event-title">前往虹橋機場</div>
       <div class="event-notes">
-        陸家嘴&#x2192;虹橋T1 約45-60分鐘（假期可能塞車）
+        人民廣場&#x2192;虹橋T1 約40-50分鐘（假期可能塞車）
       </div>
     </div>
     <div class="event confirmed">
@@ -599,8 +593,8 @@
     </div>
   </div>
   <div class="route-card">
-    <strong>路線：</strong>人民廣場(上博) &#x2192; 回浦東打包 &#x2192; 虹橋機場<br>
-    &#x1F4A1; 備選：如時間緊，可早上先打包行李帶出門，上博後直奔虹橋（約30-40分鐘）
+    <strong>路線：</strong>上博旗袍展 &#x2192; 莱莱小籠 &#x2192; 虹橋機場<br>
+    &#x1F4A1; 行李早上先打包帶出門，午餐後直奔虹橋
   </div>
 </div>
 
@@ -710,7 +704,7 @@
     <div class="todo-icon">&#x2705;</div>
     <div class="todo-text">
       <div class="todo-title">郵政博物館 週五開放</div>
-      <div class="todo-desc">週二至週日 9:00-17:00 &#xB7; 免費免預約</div>
+      <div class="todo-desc">週二至週日 9:00-17:00 &#xB7; 免預約</div>
     </div>
   </div>
   <div class="todo-card todo-done">
@@ -731,14 +725,14 @@
     <div class="todo-icon">&#x2705;</div>
     <div class="todo-text">
       <div class="todo-title">荣家黃魚麵</div>
-      <div class="todo-desc">南京西路688號 &#xB7; 16:30-21:00 &#xB7; ~&#xA5;138/人</div>
+      <div class="todo-desc">南京西路688號 &#xB7; 16:30-21:00</div>
     </div>
   </div>
   <div class="todo-card todo-done">
     <div class="todo-icon">&#x2705;</div>
     <div class="todo-text">
       <div class="todo-title">達利展門票</div>
-      <div class="todo-desc">已購票（貓眼）&#xA5;118/人</div>
+      <div class="todo-desc">已購票</div>
     </div>
   </div>
   <div class="todo-card todo-done">
@@ -752,13 +746,13 @@
     <div class="todo-icon">&#x2705;</div>
     <div class="todo-text">
       <div class="todo-title">Fotografiska 門票</div>
-      <div class="todo-desc">已購票（大眾點評）&#xA5;100</div>
+      <div class="todo-desc">已購票</div>
     </div>
   </div>
 </div>
 
 <div class="footer">
-  &#x1F382; 爸爸77歲生日慶生之旅 v5 &#xB7; Updated 2026-04-13
+  &#x1F382; 謝貞銘醫師77大壽上海行！ &#xB7; Updated 2026-04-13
 </div>
 
 <script>

@@ -172,7 +172,31 @@
     font-size: 12px;
     color: var(--muted);
     margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
   }
+  .copy-addr-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: var(--light-pink);
+    color: var(--accent);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .copy-addr-btn:hover { background: var(--accent); color: white; }
+  .copy-addr-btn:active { transform: scale(0.95); }
+  .copy-addr-btn.copied { background: var(--confirmed); color: white; border-color: var(--confirmed); }
   .event-notes {
     font-size: 12px;
     color: #555;
@@ -816,6 +840,111 @@
     }
   }
   launchConfetti();
+
+  // Auto-attach copy buttons to addresses
+  // Map of event-title (or unique substring) → full driver-friendly address
+  const ADDRESS_MAP = [
+    { match: '上海大廈', addr: '上海市虹口區北蘇州路20號 上海大廈' },
+    { match: '蘇州河畔船上書店', addr: '上海市虹口區北蘇州路 蘇州河畔（上海大廈附近）' },
+    { match: '外白渡橋', addr: '上海市虹口區北蘇州路250號 上海郵政博物館（外白渡橋）' },
+    { match: 'Polux', addr: '上海市黃浦區太倉路181弄5號 新天地北里 Polux' },
+    { match: 'Fotografiska', addr: '上海市靜安區光復路127號 Fotografiska 影像藝術中心' },
+    { match: '武康路', addr: '上海市徐匯區武康路 武康大樓' },
+    { match: '新榮記', addr: '上海市黃浦區中山東二路600號 外灘金融中心 BFC 新榮記' },
+    { match: '浦東美術館', addr: '上海市浦東新區濱江大道2777號 浦東美術館 MAP' },
+    { match: '雲和麵館', addr: '上海市靜安區華山路1623號 雲和麵館' },
+    { match: '上海音樂學院', addr: '上海市徐匯區汾陽路20號 上海音樂學院' },
+    { match: '交響樂博物館', addr: '上海市徐匯區寶慶路3號 上海交響音樂博物館' },
+    { match: 'Prada榮宅', addr: '上海市靜安區陝西北路186號 Prada 榮宅' },
+    { match: '榮宅', addr: '上海市靜安區陝西北路186號 Prada 榮宅' },
+    { match: '荣家黃魚麵', addr: '上海市靜安區南京西路688號L105A 荣家黃魚麵' },
+    { match: '龍美術館', addr: '上海市徐匯區龍騰大道3398號 龍美術館西岸館' },
+    { match: '達利展', addr: '上海市黃浦區福州路200號 老市府大樓 達利展' },
+    { match: '外灘源', addr: '上海市黃浦區圓明園路 外灘源' },
+    { match: '榮焰', addr: '上海市黃浦區虎丘路28號 榮焰板前' },
+    { match: 'LV路易號', addr: '上海市靜安區南京西路789號 興業太古匯 LV 路易號' },
+    { match: '上博旗袍展', addr: '上海市黃浦區人民大道201號 上海博物館人民廣場館' },
+    { match: '莱莱小籠', addr: '上海市黃浦區天津路506號 莱莱小籠·喬艾' },
+    { match: '虹橋機場', addr: '上海市長寧區 虹橋機場 T1 航站樓' },
+    { match: 'CI 202', addr: '上海市長寧區 虹橋機場 T1 航站樓' },
+    { match: '抵達上海', addr: '上海市浦東新區 浦東國際機場 T1 航站樓' },
+    { match: '小區散步', addr: '上海市浦東新區 陸家嘴' },
+    { match: '回家晚餐', addr: '上海市浦東新區 陸家嘴' },
+    { match: '江邊散步', addr: '上海市浦東新區 陸家嘴濱江' },
+    { match: '家裡休息', addr: '上海市浦東新區 陸家嘴' },
+  ];
+
+  function findAddress(eventEl) {
+    const titleEl = eventEl.querySelector('.event-title');
+    const title = titleEl ? titleEl.textContent : '';
+    for (const m of ADDRESS_MAP) {
+      if (title.includes(m.match)) return m.addr;
+    }
+    return null;
+  }
+
+  document.querySelectorAll('.event').forEach(ev => {
+    const locEl = ev.querySelector('.event-location');
+    const addr = findAddress(ev);
+    if (!addr) return;
+
+    // Wrap existing text in a span so flex layout works cleanly
+    let textSpan;
+    if (locEl) {
+      const original = locEl.innerHTML;
+      locEl.innerHTML = '';
+      textSpan = document.createElement('span');
+      textSpan.innerHTML = original;
+      locEl.appendChild(textSpan);
+    } else {
+      // Create a location row if missing
+      const newLoc = document.createElement('div');
+      newLoc.className = 'event-location';
+      textSpan = document.createElement('span');
+      textSpan.textContent = addr;
+      newLoc.appendChild(textSpan);
+      const titleEl = ev.querySelector('.event-title');
+      if (titleEl && titleEl.nextSibling) {
+        titleEl.parentNode.insertBefore(newLoc, titleEl.nextSibling);
+      } else {
+        ev.appendChild(newLoc);
+      }
+    }
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-addr-btn';
+    btn.type = 'button';
+    btn.innerHTML = '📋 複製地址';
+    btn.title = addr;
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      try {
+        await navigator.clipboard.writeText(addr);
+      } catch (err) {
+        // Fallback for older browsers / non-secure contexts
+        const ta = document.createElement('textarea');
+        ta.value = addr;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (_) {}
+        ta.remove();
+      }
+      btn.classList.add('copied');
+      btn.innerHTML = '✓ 已複製';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = '📋 複製地址';
+      }, 1600);
+    });
+    locEl ? locEl.appendChild(btn) : null;
+    if (!locEl) {
+      // newLoc already created and inserted above; re-find and append btn
+      const inserted = ev.querySelector('.event-location');
+      if (inserted) inserted.appendChild(btn);
+    }
+  });
 </script>
 </body>
 </html>
